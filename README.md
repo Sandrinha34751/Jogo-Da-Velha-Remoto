@@ -1,12 +1,12 @@
-# 🕹️ Jogo da Velha Remoto
+ Jogo da Velha Remoto
 
-Este projeto implementa um **jogo da velha multiplayer** com comunicação em rede via **sockets TCP/IP**, utilizando a linguagem **Python** e a biblioteca **Pygame** para a interface gráfica. O jogo também se conecta a um **banco de dados SQLite**, onde são registradas as informações de login e as jogadas de cada partida.
+Este projeto implementa um jogo da velha multiplayer com comunicação em rede via sockets TCP/IP, utilizando a linguagem Python e a biblioteca Pygame para a interface gráfica. O jogo também se conecta a um banco de dados SQLite, onde são registradas as informações de login e as jogadas de cada partida.
 
 O sistema permite que dois jogadores se conectem de forma remota, trocando mensagens via chat integrado e disputando partidas consecutivas. A cada nova partida, o servidor pode ser iniciado com uma porta diferente, garantindo a criação de sessões independentes.
 
 ---
 
-## ✨ Funcionalidades
+ Funcionalidades
 
 - Interface gráfica interativa com Pygame  
 - Conexão cliente-servidor usando sockets TCP/IP  
@@ -17,9 +17,9 @@ O sistema permite que dois jogadores se conectem de forma remota, trocando mensa
 
 ---
 
-## 🚀 Como Executar o Projeto
+Como Executar o Projeto
 
-### ⚙️ Pré-requisitos
+Pré-requisitos
 
 - Python 3 instalado (recomendado: versão 3.10 ou superior)  
 - Sistema operacional: Windows  
