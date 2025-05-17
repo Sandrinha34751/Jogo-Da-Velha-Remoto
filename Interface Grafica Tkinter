@@ -1,0 +1,52 @@
+import tkinter as tk
+from tkinter import messagebox
+from db import iniciar_banco, registrar_jogada, matriz_para_string, string_para_matriz, verificar_vitoria, verificar_empate
+
+# Classe que representa a interface gráfica do jogo da velha
+class JogoDaVelhaGUI:
+    def __init__(self, root, jogador):
+        self.root = root  # Janela principal do Tkinter
+        self.jogador = jogador  # Nome do jogador (ex: 'Jogador 1' ou 'Jogador 2')
+        self.simbolo = 'X' if jogador == 'Jogador 1' else 'O'  # Define símbolo com base no jogador
+        self.matriz = [[' ' for _ in range(3)] for _ in range(3)]  # Matriz do tabuleiro 3x3
+        self.botoes = [[None for _ in range(3)] for _ in range(3)]  # Referência aos botões do tabuleiro
+        self.criar_interface()  # Cria os elementos gráficos
+
+    # Cria a interface do tabuleiro com botões
+    def criar_interface(self):
+        self.root.title(f"Jogo da Velha - {self.jogador}")  # Título da janela
+        for i in range(3):
+            for j in range(3):
+                # Cria botão para cada célula da matriz
+                btn = tk.Button(self.root, text=' ', font=('Arial', 24), width=5, height=2,
+                                command=lambda i=i, j=j: self.fazer_jogada(i, j))  # Associa a jogada ao clique
+                btn.grid(row=i, column=j)  # Posiciona o botão no grid
+                self.botoes[i][j] = btn  # Armazena o botão na matriz de botões
+
+    # Função chamada ao clicar em uma célula do tabuleiro
+    def fazer_jogada(self, i, j):
+        if self.matriz[i][j] == ' ':  # Verifica se a célula está vazia
+            self.matriz[i][j] = self.simbolo  # Marca com o símbolo do jogador
+            self.botoes[i][j].config(text=self.simbolo, state='disabled')  # Atualiza o botão e desativa
+            estado = matriz_para_string(self.matriz)  # Converte a matriz para string
+            registrar_jogada(self.jogador, estado)  # Registra a jogada no banco
+
+            # Verifica se o jogador venceu
+            if verificar_vitoria(self.matriz, self.simbolo):
+                messagebox.showinfo("Fim de jogo", f"{self.jogador} venceu!")
+                self.root.quit()  # Fecha a janela
+            # Verifica se houve empate
+            elif verificar_empate(self.matriz):
+                messagebox.showinfo("Fim de jogo", "Empate!")
+                self.root.quit()  # Fecha a janela
+        else:
+            messagebox.showwarning("Inválido", "Essa posição já está ocupada.")  # Aviso de jogada inválida
+
+if __name__ == '__main__':
+    from db import verificar_senha
+    verificar_senha()  # Verifica senha antes de iniciar
+    iniciar_banco()  # Cria o banco e a tabela se necessário
+
+    root = tk.Tk()  # Cria a janela principal
+    app = JogoDaVelhaGUI(root, jogador='Jogador 1')  # Cria o jogo para o jogador 1 (pode ser alterado para 'Jogador 2')
+    root.mainloop()  # Inicia o loop principal do Tkinter
