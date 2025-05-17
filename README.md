@@ -1,4 +1,4 @@
- Jogo da Velha Remoto
+ **Jogo da Velha Remoto**
 
 Este projeto implementa um jogo da velha multiplayer com comunicação em rede via sockets TCP/IP, utilizando a linguagem Python e a biblioteca Pygame para a interface gráfica. O jogo também se conecta a um banco de dados SQLite, onde são registradas as informações de login e as jogadas de cada partida.
 
